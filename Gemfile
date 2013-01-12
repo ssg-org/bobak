@@ -7,8 +7,13 @@ gem 'rails', '3.2.11'
 
 # gem 'sqlite3'
 gem 'pg'
+gem 'postgres_ext'
+gem 'pg_search'
 
+# App specific
 gem 'pdf-reader'
+gem 'bootstrap-sass'
+gem 'sanitize'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109230420) do
+ActiveRecord::Schema.define(:version => 20130111235557) do
+
+  add_extension "pg_trgm"
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -31,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20130109230420) do
   end
 
   create_table "firms", :force => true do |t|
-    t.integer  "jib"
+    t.string   "jib"
     t.string   "name"
     t.string   "city"
     t.datetime "created_at",   :null => false
@@ -43,6 +45,9 @@ ActiveRecord::Schema.define(:version => 20130109230420) do
     t.string   "type"
     t.boolean  "is_insolvent"
     t.string   "customs_num"
+    t.tsvector "full_text"
   end
+
+  add_index "firms", ["full_text"], :name => "firms_full_text_idx", :index_type => :gin
 
 end
