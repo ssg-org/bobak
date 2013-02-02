@@ -27,7 +27,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: bba
+  database: bba-prod
   pool: 50
   username: bba
   password: bba

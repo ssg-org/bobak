@@ -13,8 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130111235557) do
 
-  add_extension "pg_trgm"
-
   create_table "accounts", :force => true do |t|
     t.string   "number"
     t.integer  "bank_id"
