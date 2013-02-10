@@ -18,69 +18,32 @@ namespace :pdf do
   	reader = PDF::Reader.new(file)
 
   	banks = {}
+
+  	firm_lines = []
+
   	firm = nil
   	line_num = 0
-  	page_num = 0
-  	log = false
 
-  	reader.pages.each { |page|
+  	reader.pages.each_with_index do |page, page_num|
   		
-  		if ((page_num += 1) > max_page)
-  			break
-  		end
+  		break if page_num > max_page
 
-			page.text.lines.each { |line|
-			if !line.strip!.blank?
+			page.text.lines.each do |line|
+				if !line.strip!.blank?
 
-				# Match company name - this is new company
-				/^(\d{12,13})$/.match(line) {|match|
-					# Save previous firm
-					if !firm.nil?
-						puts "Adding new firm: #{firm.jib}"
-						firm.save!
+					# Match company name - this is new company
+					if match = /^(\d{12,13})$/.match(line)
+						
+						# parse and save company info
+						save (firm_lines)
+
+						# new company
+						firm_lines = [match[1]]
+					else
+						firm_lines << line
 					end
-
-					firm = Firm.new
-					firm.date = date
-					firm.is_insolvent = false
-					firm.jib = match[1]
-					accounts = []
-				}
-
-				# Extract accounts
-				/^(\d{16})\s{2,}(.*\b)\s{2,}(.*)$/.match(line) {|match|
-
-					# New account for existing firm
-					account = Account.new
-					account.date = date
-					account.number = match[1]
-					account.name = match[2]
-
-					# Check bank
-					bank_name = match[3]
-					bank = banks[bank_name]
-					if (bank.nil?)
-						bank = Bank.new
-						bank.name = bank_name
-						puts "Adding new bank: #{bank.name}"
-						bank.save
-
-						banks[bank_name] = bank
-					end
-
-					# Set bank
-					account.bank = bank
-
-					# Add account to firm
-					firm.accounts << account
-				}
+				end
 			end
-			}
-  	}
-
-	if !firm.nil?
-		firm.save!
+		end
 	end
-end
-
 end
