@@ -10,13 +10,27 @@ module PDF
     	puts "Importing data from: #{file}"
 
       # Regex patterns
-      id_regex = /^(\d{8}|\d{12}|\d{13})$/
+      id_regex = /^(\d{6}|\d{8}|\d{12}|\d{13}|X{13}|UPI\d{10})$/
+
+      # output dir
+      out_dir = File.join(Rails.root, "db", "export", date)
+      Dir.mkdir(out_dir) if !Dir.exist?(out_dir)
+
+      # CSV headers
+      banks_headers = ['id', 'name']
+      companies_headers = ['id', 'jib', 'name']
+      accounts_headers = ['id', 'company_id', 'bank_id', 'account', 'name']
 
       # Output CSV files
-      @companies_csv = CSV.open("companies.csv","wb")
-      @accounts_csv = CSV.open("accounts.csv", "w")
-      @banks_csv = CSV.open("banks.csv", "w")
-      @skipped_csv = CSV.open("skipped.csv", "w")
+      @companies_csv = CSV.open(File.join(out_dir, "companies.csv"),"w")
+      @accounts_csv = CSV.open(File.join(out_dir, "accounts.csv"), "w")
+      @banks_csv = CSV.open(File.join(out_dir, "banks.csv"), "w")
+      @skipped_csv = CSV.open(File.join(out_dir, "skipped.csv"), "w")
+
+      # Write headers - previous code does not work
+      @companies_csv << companies_headers
+      @banks_csv << banks_headers
+      @accounts_csv << accounts_headers
 
       firm_lines = []
 
@@ -137,7 +151,7 @@ module PDF
         end
 
         @total[:accounts_saved] += 1
-        @accounts_csv << [@total[:accounts_saved], @total[:companies_saved], accounts[i], names[i], @banks.index(banks[i])+1]
+        @accounts_csv << [@total[:accounts_saved], @total[:companies_saved], @banks.index(banks[i])+1, accounts[i], names[i]]
       end
     end
   end
