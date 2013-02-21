@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  number: 
+  bank_id: 
+  firm_id: 
+
+two:
+  number: 
+  bank_id: 
+  firm_id: 
