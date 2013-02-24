@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Register::Application.load_tasks
+Bobak::Application.load_tasks

@@ -1,51 +1,35 @@
-require 'pdf-reader'
 require "CSV"
+require 'singleton'
 
 module PDF
   class Importer
+    include Singleton
 
     # Import data from PDF
-    def import(date = Time.now, file, max_page)
+    def import(date, file, max_page)
 
     	puts "Importing data from: #{file}"
 
+      # Load date
+      @date = date
+
       # Regex patterns
-      id_regex = /^(\d{6}|\d{8}|\d{12}|\d{13}|X{13}|UPI\d{10})$/
+      id_regex = /^(\d{6}|\d{8}|\d{12}|\d{13}|X{13}|UPI\d{10}|U\/I-\d{4}\/\d{2}|UF\/I\d{4}\/\d{2})$/
 
       # output dir
-      out_dir = File.join(Rails.root, "db", "export", date)
+      out_dir = File.join(Rails.root, "db", "export")
       Dir.mkdir(out_dir) if !Dir.exist?(out_dir)
 
-      # CSV headers
-      banks_headers = ['id', 'name']
-      companies_headers = ['id', 'jib', 'name']
-      accounts_headers = ['id', 'company_id', 'bank_id', 'account', 'name']
-
       # Output CSV files
-      @companies_csv = CSV.open(File.join(out_dir, "companies.csv"),"w")
-      @accounts_csv = CSV.open(File.join(out_dir, "accounts.csv"), "w")
-      @banks_csv = CSV.open(File.join(out_dir, "banks.csv"), "w")
-      @skipped_csv = CSV.open(File.join(out_dir, "skipped.csv"), "w")
+      @result_csv = CSV.open(File.join(out_dir, "#{date}.csv"), "w")
 
-      # Write headers - previous code does not work
-      @companies_csv << companies_headers
-      @banks_csv << banks_headers
-      @accounts_csv << accounts_headers
-
-      firm_lines = []
-
-      # Array of all banks
-      @banks=[]
+      owner_lines = []
 
       # Statistics
-      @total = {
-        :pages => 0,
-        :companies_read => 0,
-        :companies_saved => 0,
-        :accounts_saved => 0,
-        :accounts_skipped => 0,
-        :banks => 0
-      }
+      @total = {}
+      @total.default = 0
+
+      @cases = [0, 0, 0, 0, 0, 0]
 
       start = Time.now
     	PDF::Reader.new(file).pages.each_with_index do |page, page_num|
@@ -58,100 +42,98 @@ module PDF
           # skip empty lines
   				if !line.strip!.blank?
 
-  					# Match company ID - this is new company
+  					# Match owner ID - this is new owner
   					if line =~ id_regex
-  						# parse and save company info but skip first time
-  						save (firm_lines) if !firm_lines.empty?
+  						# parse and save owner info but skip first line
+  						parse(owner_lines) if !owner_lines.empty?
 
-  						# start capturing data for new company
-  						firm_lines = [$~[1]]
+  						# start capturing data for new owner
+  						owner_lines = [$~[1]]
             # skip strings which are not accounts: headers and footers
-  					elsif !(line =~ /Broj racuna/i || line =~ /^\d{2}\/\d{2}\/\d{4}/ || line =~ /^JIB/) && (!firm_lines.empty?)
-  						firm_lines << line.gsub(/\s{2,}/,'\t')
+  					elsif !(line =~ /Broj racuna/i || line =~ /^\d{2}\/\d{2}\/\d{4}/ || line =~ /^JIB/) && (!owner_lines.empty?)
+  						owner_lines << line.gsub(/\s{2,}/,'\t')
   					end
   				end
   			end
   		end
 
-      @companies_csv.close
-      @accounts_csv.close
-      @banks_csv.close
-      @skipped_csv.close
+      @result_csv.close
 
-      puts "Statistics: #{@total.to_yaml}"
+      puts "Statistics: #{@total.to_yaml}\n#{@cases}"
       puts "Loading finished in: %3d:%04.2f"%(Time.now-start).divmod(60.0)
   	end
 
     private
-    def save(lines)
-      @total[:companies_read] += 1
-      puts "#Loaded: #{@total[:companies_read]}" if @total[:companies_read] % 1000 == 0
+    def special_id? (id)
+      return id =~ /^(0|[1|7|9|X]{5})$/
+    end
 
-      # match company ID is always first line in array
+    def save(id, account_id, name, bank)
+      #p "#{id}, #{account_id}, #{name}, #{bank}"
+      @result_csv << [id, account_id, name, bank]
+    end
+
+    def parse(lines)
+      @total[:owners_read] += 1
+      puts "#Loaded: #{@total[:owners_read]}" if @total[:owners_read] % 1000 == 0
+
+      # match owner ID is always first line in array
       id = lines[0]
       accounts = []
       names = []
       banks = []
 
+      records = []
+      tmp = []
+
       # Parse account, name and bank iformation
       lines[1..-1].each_with_index do |line, index|
         data = line.split('\t')
-        # is this full line with account, name and bank
-        if data.size == 3
-          accounts << data[0]
-          names << data[1]
-          banks << data[2]
-        # this is potenrially second line of the account name
-        elsif (data.size == 1 && names.length > 0)
-          names[-1] += " #{line}"
 
-        #something is wrong here!!!
-        elsif (data.size == 2)
-          # Check 1: is bank part of the company name
-          @banks.each do |bank|
-
-            # we have found the bank in the name
-            if data[1].ends_with?(bank)
-              accounts << data[0]
-              names << data[1].gsub(bank,"").strip
-              banks << bank
-
-              puts "\tFixed by spliting bank from name"
-            end
-          end
-        # There are only 3 lines: id, name and bank split
-        elsif (lines.size==3 && ((lines[1] + lines[2]).count('\t')==1 || (lines[1] + lines[2]).count('\t')==2))
-          #check if lines need to be joined with '\t'
-          joined_line = (lines[1] + lines[2]).count('\t') == 1 ? [lines[2], lines[1]].join('\t') : [lines[2], lines[1]].join
-          
-          data = joined_line.split('\t')
-          accounts << data[0]
-          names << data[1]
-          banks << data[2]
-          puts "\tFixed by reversing and joining lines"
-        else
-
-          puts "\tWarning: Skipping account because of incorect order! #{line}"
-          @skipped_csv << [index,lines]
-          @total[:accounts_skipped] += 1
+        # Line with account
+        if data.size == 3 && !tmp.empty?
+          records << tmp
+          tmp = []
         end
+        
+        tmp << data
       end
 
-      # Take first name of accounts as firm name
-      @total[:companies_saved] += 1
-      @companies_csv << [@total[:companies_saved], id, names.compact.first]
+      records.push(tmp) if !tmp.empty?
 
-      # Add all acounts
-      accounts.each_index do |i|
-        # Add bank if missing
-        if !@banks.include?(banks[i])
-          @total[:banks] += 1
-          @banks << banks[i]
-          @banks_csv << [@total[:banks], banks[i]]
+      records.each do |account|
+        isSpecial = special_id? id
+
+        # Case 1: owner has only 1 account and its single line
+        if account.size == 1 && account.first.size == 3
+          @cases[1] += 1
+          
+          save(isSpecial ? nil : id, account.first[0], account.first[1], account.first[2])
+          #p "#{id}, #{account.first[0]}, #{account.first[1]}, #{account.first[2]}"
+        # Case 2: one account split into 2 lines - first line: name and bank, 2nd line is account ID
+        elsif account.size == 2 && (account.flatten.size == 3)
+          #p "Reversed: #{account.reverse.flatten}"
+          @cases[2] += 1
+
+          full_line = account.reverse.flatten
+          save(isSpecial ? nil : id, full_line[0], full_line[1], full_line[2])
+        else
+          @cases[3] += 1
+          # find line with all info
+          account_info = account.select {|line| line.size == 3}
+
+          # there is only 1 line with
+          if account_info.size == 1
+            @cases[4] += 1
+            #p "#{id}, #{account_info.first[0]}, #{account_info.first[2]}, #{name}"
+
+            name = [account_info.first[1], (account - account_info).flatten].join(' ')
+            save(isSpecial ? nil : id, account_info.first[0], name, account_info.first[2])
+          else
+            @cases[5] += 1
+            p "Multiple info lines: #{account_info} - #{account}"
+          end
         end
-
-        @total[:accounts_saved] += 1
-        @accounts_csv << [@total[:accounts_saved], @total[:companies_saved], @banks.index(banks[i])+1, accounts[i], names[i]]
       end
     end
   end

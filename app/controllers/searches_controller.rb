@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
 	def show
-		@firms = Firm.search_full_text(params[:q])
+		@owners = Owner.search(params[:q], params[:o], params[:l])
 	end
 end

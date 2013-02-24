@@ -6,10 +6,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: bba-dev
+  database: bobak-dev
   pool: 50
-  username: bba
-  password: bba
+  username: bobak
+  password: bobak
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -18,17 +18,27 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: bba-test
+  database: bobak-test
   pool: 50
-  username: bba
-  password: bba
+  username: bobak
+  password: bobak
   host: localhost
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: bba-prod
+  database: bobak-prod
   pool: 50
-  username: bba
-  password: bba
+  username: bobak
+  password: bobak
   host: localhost
+
+af-tunnel:
+  adapter: postgresql
+  encoding: unicode
+  database: df8af3ce5f6a94cf1bbc544bf5732ed32
+  pool: 50
+  username: ue968608ab76143d785f62efd209ef950
+  password: p6e479276ba9047a7bff0efab5d0ecca6
+  host: localhost
+  port: 10000

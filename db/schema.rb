@@ -11,16 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111235557) do
+ActiveRecord::Schema.define(:version => 20130223172101) do
+
+  create_table "account_statuses", :force => true do |t|
+    t.integer  "account_id"
+    t.date     "date"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
+    t.text     "name"
     t.integer  "bank_id"
-    t.integer  "firm_id"
+    t.integer  "owner_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "name"
-    t.datetime "date"
   end
 
   create_table "banks", :force => true do |t|
@@ -30,22 +37,23 @@ ActiveRecord::Schema.define(:version => 20130111235557) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "firms", :force => true do |t|
-    t.string   "jib"
-    t.string   "name"
+  create_table "januar", :id => false, :force => true do |t|
+    t.string "id"
+    t.string "account"
+    t.text   "name"
+    t.string "bank"
+  end
+
+  create_table "owners", :force => true do |t|
+    t.string   "oid"
+    t.text     "name"
     t.string   "city"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.datetime "date"
-    t.string   "mbs"
-    t.string   "name_short"
     t.string   "address"
-    t.string   "type"
-    t.boolean  "is_insolvent"
-    t.string   "customs_num"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.tsvector "full_text"
   end
 
-  add_index "firms", ["full_text"], :name => "firms_full_text_idx", :index_type => :gin
+  add_index "owners", ["full_text"], :name => "owners_full_text_idx", :index_type => :gin
 
 end

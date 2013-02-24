@@ -1,5 +1,5 @@
 <div class="page-header">
-	<h1>Registar</h1>
+	<h1>Bobak</h1>
 </div>
 <div>
 	<form class="form-search">
@@ -11,15 +11,15 @@
 <table class="table">
 	<tr>
 		<th>Jedinstveni matični broj</th>
-		<th>Naziv firme</th>
+		<th>Naziv vlasnika</th>
 		<th>Broj blokiranih računa</th>
 	</tr>
-	<% @firms.each do |firm| %>
+	<% @owners.each do |owner| %>
 	<tr>
-		<td><%= firm.jib %></td>
-		<td><%= firm.name %></td>
-		<td><%= firm.accounts.size %></td>
+		<td><%= owner.oid %></td>
+		<td><%= owner.name %></td>
+		<td><%= owner.accounts.size %></td>
 	</tr>
-	<% end if @firms %>
+	<% end if @owners %>
 </table>
 </div>

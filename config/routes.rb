@@ -1,4 +1,4 @@
-Register::Application.routes.draw do
+Bobak::Application.routes.draw do
   resource :search
   resource :reports
   # The priority is based upon order of creation:
