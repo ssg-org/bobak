@@ -55,5 +55,4 @@ ActiveRecord::Schema.define(:version => 20130223172101) do
   end
 
   add_index "owners", ["full_text"], :name => "owners_full_text_idx", :index_type => :gin
-
 end
