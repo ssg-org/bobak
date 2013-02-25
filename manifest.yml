@@ -1,0 +1,17 @@
+---
+applications:
+  .:
+    name: bobak
+    framework:
+      name: rails3
+      info:
+        mem: 256M
+        description: Rails Application
+        exec: 
+    infra: eu-aws
+    url: ${name}.${target-base}
+    mem: 128M
+    instances: 1
+    services:
+      bobak-db:
+        type: postgresql
