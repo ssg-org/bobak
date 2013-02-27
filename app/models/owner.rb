@@ -10,7 +10,6 @@ class Owner < ActiveRecord::Base
   pg_search_scope :search_full_text, 
   								:against => :name,
   								:using => {
-                      trigram: {},
 	                    tsearch: {
 	                      tsvector_column: 'full_text'
   	                  }
