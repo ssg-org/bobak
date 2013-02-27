@@ -10,6 +10,8 @@ gem 'pg'
 gem 'postgres_ext'
 gem 'pg_search'
 
+gem 'thin'
+
 # App specific
 gem 'pdf-reader'
 gem 'bootstrap-sass'
