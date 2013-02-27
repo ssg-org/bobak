@@ -1,8 +1,12 @@
 Bobak::Application.routes.draw do
   resource :search
   resource :reports
-  resource :about
   resource :home
+
+  match 'about' => 'home#about'
+
+  root :to => 'home#show'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -52,7 +56,6 @@ Bobak::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#show'
 
   # See how all your routes lay out with "rake routes"
 
