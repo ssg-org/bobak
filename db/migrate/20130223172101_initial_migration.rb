@@ -33,7 +33,7 @@ class InitialMigration < ActiveRecord::Migration
 		    t.timestamps
 		  end
 
-	    execute "CREATE EXTENSION pg_trgm;"  	
+	    #execute "CREATE EXTENSION pg_trgm;"  	
 			
 			execute(<<-'eosql'.strip)
 			      ALTER TABLE owners ADD COLUMN full_text tsvector;
