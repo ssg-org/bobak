@@ -2,7 +2,7 @@
 -- :raw_table - table name to load raw data from file
 -- :date - date of load
 
--- Command: psql -v raw_table=januar -v date='2013-01-03' -f db\import.sql -d bobak-dev -U bobak
+-- Command: psql -v raw_table=januar -v date=\'2013-01-03\' -f db/import.sql -h localhost -d bobak-dev -U bobak
 
 set client_encoding to 'UTF8';
 

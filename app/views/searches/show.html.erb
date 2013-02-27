@@ -1,25 +1,28 @@
-<div class="page-header">
-	<h1>Bobak</h1>
-</div>
-<div>
-	<form class="form-search">
-	  <input type="text" name="q" class="input search-query" value="<%= params[:q]%>">
-	  <button type="submit" class="btn">Search</button>
-	</form>
-</div>
-<div>
-<table class="table">
-	<tr>
-		<th>Jedinstveni matični broj</th>
-		<th>Naziv vlasnika</th>
-		<th>Broj blokiranih računa</th>
-	</tr>
-	<% @owners.each do |owner| %>
-	<tr>
-		<td><%= owner.oid %></td>
-		<td><%= owner.name %></td>
-		<td><%= owner.accounts.size %></td>
-	</tr>
-	<% end if @owners %>
-</table>
+	
+	<div id="mainContainer">
+		<div class="innerHolder">
+			<form class="form-search" id="mainSearchForm">
+				  <input type="text" name="q" class="input search-query" value="<%= params[:q]%>">
+				  <div class="img_btn">
+					<a class="search_btn" href="#" onclick="$('#mainSearchForm').submit();"></a>
+				  </div>
+			</form><br/>
+			<div class="results">
+				<table class="table" padding="0" cellspacing="5">
+					<tr class="header">
+						<th>JIB</th>
+						<th>NAZIV FIRME/VLASNIKA</th>
+						<th>BROJ BLOKIRANIH RACUNA</th>
+					</tr>
+					<% @owners.each do |owner| %>
+					<tr>
+						<td><%= owner.oid %></td>
+						<td><%= owner.name %></td>
+						<td class="accountsize"><%= owner.accounts.size %></td>
+					</tr>
+					<% end if @owners %>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>

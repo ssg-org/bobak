@@ -13,6 +13,8 @@
 
 ActiveRecord::Schema.define(:version => 20130223172101) do
 
+  add_extension "pg_trgm"
+
   create_table "account_statuses", :force => true do |t|
     t.integer  "account_id"
     t.date     "date"
@@ -37,13 +39,6 @@ ActiveRecord::Schema.define(:version => 20130223172101) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "januar", :id => false, :force => true do |t|
-    t.string "id"
-    t.string "account"
-    t.text   "name"
-    t.string "bank"
-  end
-
   create_table "owners", :force => true do |t|
     t.string   "oid"
     t.text     "name"
@@ -55,4 +50,6 @@ ActiveRecord::Schema.define(:version => 20130223172101) do
   end
 
   add_index "owners", ["full_text"], :name => "owners_full_text_idx", :index_type => :gin
+  add_index "owners", ["name"], :name => "owners_trigram_idx", :index_type => :gist
+
 end

@@ -1,3 +1,32 @@
-<div class="page-title">
-	<h3>Reports</h3>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+       google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Banke', 'Broj blokiranih racuna'],
+          ['Raiffeisen',     11],
+          ['Intesa',      2],
+          ['Sberbank',  5],
+          ['Unicredit', 7]
+        ]);
+
+        var options = {
+          legend: {position:'right'},
+          backgroundColor: '#fff',
+          pieSliceText: 'value',
+          pieSliceBorderColor: '#fff',
+          slices: [{color: '#F8F237'}, {color: '#EF660C'}, {color: '#5DAB23'}, {color: '#E51811'}],
+          titleTextStyle: {color: '#333', fontName: 'Titillium Web', fontSize: 12}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+<div id="mainContainer">
+    <div class="innerHolder">
+       <div id="chart_div" style="width: 715px; height: 550px;"></div>
+    </div>
+  </div>
 </div>
