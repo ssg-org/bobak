@@ -56,7 +56,7 @@ class InitialMigration < ActiveRecord::Migration
 			        setweight(to_tsvector('pg_catalog.english', coalesce(name,'')), 'B');
 
 			      CREATE INDEX owners_full_text_idx ON owners USING gin(full_text);
-			      #CREATE INDEX owners_trigram_idx ON owners USING gist(name gist_trgm_ops);
+			      --CREATE INDEX owners_trigram_idx ON owners USING gist(name gist_trgm_ops);
 			eosql
   end
 
