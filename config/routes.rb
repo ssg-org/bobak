@@ -1,8 +1,8 @@
 Bobak::Application.routes.draw do
-  resource :search
-  resource :home
+  resource :search, :only => [:show]
+  resource :home,   :only => [:show, :about]
 
-  resource :reports do
+  resource :reports, :only => [:bank, :owner] do
     get :bank
     get :owner
   end
