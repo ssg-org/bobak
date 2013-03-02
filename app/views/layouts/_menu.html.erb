@@ -2,12 +2,12 @@
 	<div id="leftMenu">
 		<div id="opacity"></div>
 		<div class="menuitemholder">
-			<a class="menuitem" id="menuhome" href="about"></a>
+			<%= link_to('', about_path(), {:id => 'menuhome', :class => 'menuitem'}) %>
 		</div>
 		<div class="menuitemholder">
-			<a class="menuitem" id="menusearch" href="search"></a>
+			<%= link_to('', search_path(), {:id => 'menusearch', :class => 'menuitem'}) %>
 		</div>
 		<div class="menuitemholder">
-			<a class="menuitem" id="menustats" href="reports"></a>
+			<%= link_to('', bank_reports_path(), {:id => 'menustats', :class => 'menuitem'}) %>
 		</div>
 	</div>

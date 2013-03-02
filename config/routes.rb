@@ -1,7 +1,11 @@
 Bobak::Application.routes.draw do
   resource :search
-  resource :reports
   resource :home
+
+  resource :reports do
+    get :bank
+    get :owner
+  end
 
   match 'about' => 'home#about'
 
