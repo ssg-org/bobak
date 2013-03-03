@@ -8,8 +8,10 @@ class SearchesController < ApplicationController
 		@color = "#bd1550"
 		@back = true
 
-		limit = params[:l].to_i > 0 ? [MAX_LIMIT, params[:l].to_i] : MAX_LIMIT 
+		limit = params[:l].to_i > 0 ? [MAX_LIMIT, params[:l].to_i].min : MAX_LIMIT 
 		offset = params[:o].to_i
+
+		@owners = Owner.search(params[:q], offset, limit)
 		
 	end
 end

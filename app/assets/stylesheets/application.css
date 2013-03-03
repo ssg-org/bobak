@@ -8,6 +8,7 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require common
  *= require_self
  *= require_tree .
  * target ÷ context = result (em)
@@ -124,13 +125,13 @@ ul {
 }
 
 .cblogo {
-    width: 760px;
+    width: 765px;
     height: 430px;
 
 }
 
 #cblogodiv {
-    width: 760px;
+    width: 765px;
     height: 430px;
     margin-top: 50px;
 }
@@ -214,8 +215,8 @@ ul {
 #mainContainer {
  	margin: 0 auto;
     text-align: left;
-    min-width: 755px;
-    width: 755px;
+    min-width: 765px;
+    width: 765px;
     min-height: 680px;
     display: inline;
     float: left;
@@ -272,7 +273,11 @@ ul {
 }
 
 #menustats {
-	background:#e97f02 url('stats_wh.png') no-repeat center center;
+	background:#f8ca00 url('stats_wh.png') no-repeat center center;
+}
+
+#menumail {
+    background:#8a9b0f url('mail_wh.png') no-repeat center center;
 }
 
 #menuback {
@@ -311,6 +316,66 @@ input[type=text] {
     display: inline;
     float: left;
     margin-left: 3px !important;
+    margin-top: 10px;
+
+}
+
+input[type=text] .emailforma {
+    font-family: 'Titillium Web', Arial, Georgia, serif;
+    font-size: 1em;
+    color: #333;
+    height: 35px;
+    width: 400px;
+    padding-left: 10px;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #efefef;
+    display: block;
+    float: left;
+    margin-left: 3px !important;
+    margin-top: 10px;
+
+}
+
+textarea {
+    font-family: 'Titillium Web', Arial, Georgia, serif;
+    font-size: 1em;
+    color: #333;
+    height: 200px;
+    width: 400px;
+    padding-left: 10px;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #efefef;
+    display: inline;
+    float: left;
+    margin-left: 3px !important;
+    margin-top: 10px;
+
+}
+
+.send_btn {
+    width: 80px;
+    height: 30px;
+    background-color: #8a9b0f;
+    padding: 10 auto !important;
+    display: inline-block;
+    margin-left: 3px !important;
+    margin-top: 10px;
+
+}
+
+.send_btn a {
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    font-family: 'Titillium Web', Arial, Georgia, serif;
+    font-size: 1em;
+    line-height: 1.5em;
+    color: #FFF;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-top: 10px;
 
 }
 
@@ -402,3 +467,4 @@ input[type=text] {
     margin-left: 3px !important;
     font-style: italic;
 }
+

@@ -5,12 +5,12 @@ class Owner < ActiveRecord::Base
   validate :name
 
   has_many :accounts
+  has_many :owner_statuses
 
   # Free text search
   pg_search_scope :search_full_text, 
   								:against => :name,
   								:using => {
-                      trigram: {},
 	                    tsearch: {
 	                      tsvector_column: 'full_text'
   	                  }
