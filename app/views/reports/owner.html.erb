@@ -1,34 +1,27 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-  google.load("visualization", "1", {packages:["corechart"]});
-  google.setOnLoadCallback(drawChart);
+  google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      function drawTable() {
 
-  function drawChart() {
+        var report_data = <%= raw @report %>;
+        var data = new google.visualization.DataTable(report_data);
 
-    var options = {
-          title: 'TOP 10 BANAKA PO BROJU BLOKIRANIH VLASNIKA',
-          titleTextStyle: {color: '8a9b0f', fontName: 'Titillium Web', fontSize: 14},
-          width: 700,
-          height: 650,
-          chartArea: {left:450, top:70, width: 250, height: 540},   
-          backgroundColor: 'white',
-          colors: ['8a9b0f'],
-          vAxis: {textStyle: {color: '8a9b0f', fontName: 'Titillium Web', fontSize: 12}, gridlines:{count:9}},
-          hAxis: {textStyle: {color: '8a9b0f', fontName: 'Titillium Web', fontSize: 12}},
-          tooltip: {textStyle: {color: '#333', fontName: 'Titillium Web', fontSize: 12}}
-        };
+        var options = {
+          cssClassNames: {headerRow: 'tbth', tableRow: 'tbtr', headerCell: 'tbth', hoverTableRow:'tbthhover', tableCell:'tbtd', headerCell:'tbhc', tableCell: 'tbcell'},
+          showRowNumber: false,
+          alternatingRowStyle: false
+        }
+        
 
-    var report_data = <%= raw @report %>;
-    
-    var data = new google.visualization.DataTable(report_data);
-    data.sort({column: 1, desc: true});
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, options);
 
-    var chart = new google.visualization.BarChart(document.getElementById('chart_div')).draw(data, options);
-  }
+      }
 </script>
 <div id="mainContainer">
     <div class="innerHolder">
-       <div id="chart_div" style="width: 715px; height: 550px;"></div>
+       <div id="table_div" style="width: 715px; height: 550px;"></div>
     </div>
   </div>
 </div>

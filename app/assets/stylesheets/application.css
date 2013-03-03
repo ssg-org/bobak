@@ -61,11 +61,11 @@ table {
 
 table, th, td {
     font-family: 'Titillium Web', Arial, Georgia, serif;
-    color: #555;
     font-size: 0.9em;
     font-weight: 600;        
     border-collapse:collapse;
     padding: 5px;
+    text-align: left;
 }
 
 tr.header {
@@ -74,6 +74,7 @@ tr.header {
     font-weight: bold;
     text-align: center;
 }
+
 
 th {
     border-right: 1px solid #e1e1e1;
@@ -96,6 +97,45 @@ td.accountsize {
 
 ul {
     font-size: 0.875em;      /* 14px / 16px = 0.875em */
+}
+
+.tbtr {
+    border-bottom: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    font-weight: bold;
+    color: #ffffff !important;
+    text-align: left;
+    padding: 10px;
+}
+
+.tbth {
+    border-right: 1px solid #e1e1e1;
+    background-color: #bd1550;
+    color: #ffffff !important;
+    text-align: left;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.tbthhover {
+    background-color: #eee;
+    color: #333;
+}
+
+.tbtd {
+    text-align: left;
+    padding: 5px !important;
+}
+
+.tbhc {
+    text-align: center;
+    padding: 8px !important;
+    color: #ffffff;
+}
+
+.tbcell {
+    text-align: left;
+    padding: 5px !important;
 }
 
 .tablehide {
