@@ -2,7 +2,7 @@
 class AboutsController < ApplicationController
 	def show
 		@title = "ŠTA JE BOBAK?"
-		@titletext = "Bobak je sistem za pretraživnje firmi u Bosni i Hercegovini koje imaju blokirane racune u bh bankama."
+		@titletext = "Bobak je sistem za pretraživnje firmi u Bosni i Hercegovini koje imaju blokirane račune u bh bankama."
 		@color = "#490a3d"
 		@back = true
 	end
