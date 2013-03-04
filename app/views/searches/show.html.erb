@@ -11,9 +11,9 @@
 			<div class="results <%= @owners.length == 0 ? 'tablehide' : 'tableshow' %>">
 				<table width="100%" class="table <%= @owners.length == 0 ? 'tablehide' : 'tableshow' %>" padding="0" cellspacing="5">
 					<tr class="header">
-						<th width="100">JIB</th>
-						<th width="520">NAZIV FIRME</th>
-						<th width="80"># RAČUNA</th>
+						<th width="100" align="center">JIB</th>
+						<th width="520" align="center">NAZIV FIRME</th>
+						<th width="80" align="center">RAČUNA</th>
 					</tr>
 					<% @owners.each do |owner| %>
 					<tr>

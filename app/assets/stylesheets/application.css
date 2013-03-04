@@ -71,9 +71,10 @@ table, th, td {
     text-align: left;
 }
 
-tr.header {
+tr .header {
     border-bottom: 1px solid #e1e1e1;
     border-right: 1px solid #e1e1e1;
+    color: #333;
     font-weight: bold;
     text-align: center;
 }
@@ -81,12 +82,13 @@ tr.header {
 
 th {
     border-right: 1px solid #e1e1e1;
-    background-color: #bd1550;
-    color: white;
+    background-color: #bd1550 !important;
+    color: #333;
+    text-align: center;
 }
 
 tr {
-   background-color: #FFF;
+   background-color: #fefefe;
    border-bottom: 1px solid #e1e1e1;
 }
 
@@ -270,11 +272,11 @@ ul {
 }
 
 .results {
-
     width: 100% !important;
     height: 100%;
     margin-top: 30px;
     display: none;
+    margin-bottom: 30px;
 }
 
 #mainContainer {
