@@ -359,7 +359,7 @@ input[type=text] {
 
 }
 
-input[type=text] .emailforma {
+.emailforma {
     font-family: 'Titillium Web', Arial, Georgia, serif;
     font-size: 1em;
     color: #333;
@@ -372,8 +372,7 @@ input[type=text] .emailforma {
     display: block;
     float: left;
     margin-left: 3px !important;
-    margin-top: 10px;
-
+    margin-top: 10px !important;
 }
 
 textarea {
