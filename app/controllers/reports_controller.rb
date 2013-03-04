@@ -8,18 +8,18 @@ class ReportsController < ApplicationController
 		@color = "#f8ca00"	
 		@back = true
 
-		date = '2013-01-03'
+		# FIX THIS!!!
+		month = Time.now.month - 1
 
 		case params[:t]
 		when 'by_accounts'
-			@report = Reporting::Builder.new().top_banks_by_accounts(10, date)
+			@report = Reporting::Builder.new().top_banks_by_accounts(10, month)
 		when 'by_owners'
-			@report = Reporting::Builder.new().top_banks_by_owners(10, date)
-			#@report2 = Reporting::Builder.new().top_owners_by_accounts(10, date)
+			@report = Reporting::Builder.new().top_banks_by_owners(10, month)
 		else 
 			#'all'
-			@report_banks = Reporting::Builder.new().top_banks_all(10, date)
-			@report_owners = Reporting::Builder.new().top_owners_by_accounts(10, date)
+			@report_banks = Reporting::Builder.new().top_banks_all(10, month)
+			@report_owners = Reporting::Builder.new().top_owners_by_accounts(10, month)
 		end	
 	end
 end

@@ -5,7 +5,6 @@
 -- Command: psql -v raw_table=januar -v date=\'2013-01-03\' -f db/import.sql -h localhost -d bobak-dev -U bobak
 
 set client_encoding to 'UTF8';
-
 /*
 TRUNCATE TABLE banks;
 TRUNCATE TABLE owners;
@@ -110,12 +109,13 @@ ALTER TABLE ONLY owner_summaries ALTER COLUMN updated_at SET DEFAULT current_tim
 
 INSERT INTO owner_summaries(owner_id, date, year, month, day, blocked_accounts)
 (SELECT
-	accounts.owner_id, account_statuses.date, account_statuses.year, account_statuses.month, account_statuses.day, count(distinct accounts.id)
- FROM accounts 
+	owners.id, account_statuses.date, account_statuses.year, account_statuses.month, account_statuses.day, count(owners.id)
+ FROM owners
+ 	INNER JOIN accounts on accounts.owner_id = owners.id
  	INNER JOIN account_statuses on accounts.id = account_statuses.account_id
  WHERE
  	account_statuses.date = DATE :date
- GROUP BY accounts.id, account_statuses.date, account_statuses.year, account_statuses.month, account_statuses.day);
+ GROUP BY owners.id, account_statuses.date, account_statuses.year, account_statuses.month, account_statuses.day);
 
 ALTER TABLE ONLY owner_summaries ALTER COLUMN created_at SET DEFAULT null;
 ALTER TABLE ONLY owner_summaries ALTER COLUMN updated_at SET DEFAULT null;
