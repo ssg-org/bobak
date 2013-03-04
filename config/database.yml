@@ -36,9 +36,9 @@ production:
 af-tunnel:
   adapter: postgresql
   encoding: unicode
-  database: df8af3ce5f6a94cf1bbc544bf5732ed32
+  database: d65478203f58e4fcf96a3fbd9f7993b2f
   pool: 50
-  username: ue968608ab76143d785f62efd209ef950
-  password: p6e479276ba9047a7bff0efab5d0ecca6
+  username: u87e1591f26f640a3b5c47c1d0c98d907
+  password: p7f34edfcfe6b4aa595c817f74ee021d5
   host: localhost
   port: 10000
