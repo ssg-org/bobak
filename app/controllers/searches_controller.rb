@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SearchesController < ApplicationController
-	MAX_LIMIT = 20
+	MAX_LIMIT = 15
 
 	def show
 		@title = "PRETRAGA"
@@ -12,5 +12,6 @@ class SearchesController < ApplicationController
 		offset = params[:o].to_i
 
 		@owners = Owner.search(params[:q], offset, limit)
+		
 	end
 end

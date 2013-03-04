@@ -22,7 +22,7 @@ module Reporting
     end
 
     def top_owners_by_accounts(limit, date)
-    	report = Report.new().add_column('Vlasnik').add_column('Broj računa', 'number')
+    	report = Report.new().add_column('Firma').add_column('Računa')
 
     	OwnerSummary.top_owners_by_accounts(limit, date).each do |summary|
     		report.add_row([summary.owner.name, summary.blocked_accounts])
@@ -30,5 +30,16 @@ module Reporting
 
     	return report.to_json
     end
+
+    def top_banks_all(limit, date)
+      report = Report.new().add_column('Banka').add_column('Broj računa', 'number').add_column('Broj firmi', 'number')
+
+      BankSummary.get_top_banks(limit, date).each do |summary|
+        report.add_row([summary.bank.name, summary.blocked_accounts, summary.blocked_owners])
+      end
+
+      return report.to_json
+    end
+
   end
 end

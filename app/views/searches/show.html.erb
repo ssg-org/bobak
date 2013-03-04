@@ -7,18 +7,19 @@
 					<a class="search_btn" href="#" onclick="$('#mainSearchForm').submit();"></a>
 				  </div>
 			</form><br/>
-			<div class="results">
-				<table class="table" padding="0" cellspacing="5">
+			<div class="tip"><p>Firme možete pretraživati po njihovom nazivu ili jedinstvenom identifikacionom broju (JIB)</p></div>
+			<div class="results <%= @owners.length == 0 ? 'tablehide' : 'tableshow' %>">
+				<table width="100%" class="table <%= @owners.length == 0 ? 'tablehide' : 'tableshow' %>" padding="0" cellspacing="5">
 					<tr class="header">
-						<th>JIB</th>
-						<th>NAZIV FIRME/VLASNIKA</th>
-						<th>BROJ BLOKIRANIH RACUNA</th>
+						<th width="100" align="center">JIB</th>
+						<th width="520" align="center">NAZIV FIRME</th>
+						<th width="80" align="center">RAČUNA</th>
 					</tr>
 					<% @owners.each do |owner| %>
 					<tr>
-						<td><%= owner.oid %></td>
-						<td><%= owner.name %></td>
-						<td class="accountsize"><%= owner.accounts.size %></td>
+						<td width="100" align="center"><%= owner.oid %></td>
+						<td width="520"><%= owner.name %></td>
+						<td width="80" class="accountsize"><%= owner.accounts.size %></td>
 					</tr>
 					<% end if @owners %>
 				</table>

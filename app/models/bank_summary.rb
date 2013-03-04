@@ -10,4 +10,8 @@ class BankSummary < ActiveRecord::Base
   def self.get_top_banks_by_owners(limit = 10, date = nil)
   	return BankSummary.includes(:bank).order('blocked_owners DESC').limit(limit).where(:date => date)
   end
+
+  def self.get_top_banks(limit = 10, date = nil)
+  	return BankSummary.includes(:bank).order('blocked_accounts DESC').limit(limit).where(:date => date)
+  end
 end
