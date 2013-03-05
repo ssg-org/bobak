@@ -18,7 +18,7 @@ gem 'bootstrap-sass'
 gem 'sanitize'
 
 gem 'execjs'
-#gem 'therubyracer'
+gem 'therubyracer'
 
 gem 'aws-ses', :require => 'aws/ses'
 
