@@ -1,10 +1,11 @@
 Bobak::Application.routes.draw do
   resource :search, :only => [:show]
-  resource :contact, :only => [:show]
-  resource :home,   :only => [:show, :about]
   resource :reports, :only => [:show] 
-
-
+  resource :home,   :only => [:show, :about, :contact]  do
+    post :contact
+  end
+ 
+  match 'contact' => 'home#contact'
   match 'about' => 'home#about'
 
   root :to => 'home#about'

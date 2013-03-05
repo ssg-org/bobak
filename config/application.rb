@@ -61,5 +61,16 @@ module Bobak
     
     # http://www.simonecarletti.com/blog/2012/02/heroku-and-rails-3-2-assetprecompile-error/
     config.assets.initialize_on_precompile = false
-  end
+
+    # Email setup
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :address              => "smtpout.secureserver.net",
+      :port                 => 80,
+      :domain               => 'bobak.sredisvojgrad.org',
+      :user_name            => 'bobak@sredisvojgrad.org',
+      :password             => 'Ilovebobak',
+      :authentication       => 'plain'
+    }
+    end
 end
