@@ -56,6 +56,10 @@ p.white{
     line-height: 1em;
 }
 
+img {
+    border: 0;
+}
+
 table {
     margin-top: 10px;
     width: 700px;
