@@ -63,14 +63,6 @@ module Bobak
     config.assets.initialize_on_precompile = false
 
     # Email setup
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :address              => "smtpout.secureserver.net",
-      :port                 => 80,
-      :domain               => 'bobak.sredisvojgrad.org',
-      :user_name            => 'bobak@sredisvojgrad.org',
-      :password             => 'Ilovebobak',
-      :authentication       => 'plain'
-    }
+    config.action_mailer.delivery_method = :ses
     end
 end

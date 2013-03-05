@@ -20,10 +20,17 @@ class HomeController < ApplicationController
 		@color = "#8a9b0f"
 		@back = true
 
-		p params
-
 		if params[:name] && params[:email] && params[:message]
-			ContactMailer.inquiry_email(params[:name], params[:email], params[:message])
+			begin
+				ContactMailer.inquiry_email(params[:name], params[:email], params[:message]).deliver
+			rescue Exception => ex
+				p "Error while sending email: #{ex.message}"
+				p "Trace: #{ex.backtrace.join('\n')}"
+				redirect_to root_path()
+			end
 		end
+
+		# FIX THIS
+		redirect_to root_path() if params[:method] == 'POST'
 	end
 end

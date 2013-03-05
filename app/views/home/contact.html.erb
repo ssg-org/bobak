@@ -1,0 +1,38 @@
+<div id="errors"></div>
+<div id="mainContainer">
+	<div class="innerHolder">
+		<form class="form-contact" id="mainContactForm" method="post">
+		  <input type="text" name="name" class="emailforma" placeholder="Ime i prezime" >
+		  <input type="text" name="email" class="emailforma" placeholder="Email" >
+		  <textarea name="message" rows="5" cols="4" placeholder="Pitanje ili poruka" ></textarea>
+		  <br/>
+		</form><br/>
+
+		<div class="tip"><p></p>
+		<div class="send_btn">
+			<a class="" href="#" onclick="$('#mainContactForm').submit()">POŠALJI</a>
+		</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#mainContactForm").validate({
+		  rules: {
+		    name: 		"required",
+		    message: 	"required",
+		    email: 		{ required: true, email: true}
+		  },
+		  messages: {
+		  	name: 	'Molimo unesive Vaše ime.',
+		  	email: 	'Molimo unesite ispravnu email adresu.',
+		  	message: 'Molimo unesite Vašu poruku.' 
+		  },
+		  errorElement: "div",
+		  submitHandler: function(form) {
+   			form.submit();
+ 			}
+		})
+	});
+</script>
