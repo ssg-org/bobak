@@ -19,10 +19,19 @@
 					<tr>
 						<td width="100" align="center"><%= owner.oid %></td>
 						<td width="520"><%= owner.name %></td>
-						<td width="80" class="accountsize"><%= owner.accounts.size %></td>
+						<td width="80" class="accountsize"><%= owner.owner_summaries.first.blocked_accounts %></td>
 					</tr>
 					<% end if @owners %>
 				</table>
+				<div class="prevnext">
+					<% if @next %>
+						<%= link_to('Sljedeća', search_path(:q => params[:q], :o => @next), :class=>"next-btn") %>
+					<% end %>
+					<% if @previous %>
+						<%= link_to('Prethodna', search_path(:q => params[:q], :o => @previous), :class=>"prev-btn") %>
+					<% end %>
+					
+				</div>
 			</div>
 		</div>
 	</div>

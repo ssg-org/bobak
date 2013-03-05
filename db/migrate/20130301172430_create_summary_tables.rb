@@ -4,6 +4,8 @@ class CreateSummaryTables < ActiveRecord::Migration
   		t.date		:date
   		t.integer :blocked_accounts
       t.integer :blocked_owners
+      
+      t.timestamps
 
   		t.references :bank
   	end
@@ -11,6 +13,8 @@ class CreateSummaryTables < ActiveRecord::Migration
   	create_table :owner_summaries do |t|
   		t.date 		:date
   		t.integer	:blocked_accounts
+
+      t.timestamps
 
   		t.references :owner
   	end
