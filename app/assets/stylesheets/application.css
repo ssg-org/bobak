@@ -56,6 +56,10 @@ p.white{
     line-height: 1em;
 }
 
+img {
+    border: 0;
+}
+
 table {
     margin-top: 10px;
     width: 700px;
@@ -347,6 +351,42 @@ ul {
 #menuback {
     width: 100%;
     min-height: 110px;
+}
+
+.prevnext {
+    width: 100% !important;
+    min-height: 30px !important;
+    display: block;
+    text-align: center;
+}
+
+.prevnext a {
+    font-size: 12px;
+    line-height: 24px;
+    vertical-align: middle;
+    color: #333;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.prev-btn {
+    width: 100px;
+    height: 24px;
+    float: right;
+    display: inline;
+    margin-right: 10px;
+    background-color: #fff;
+  /*  background:#fff url('prev_p.png') no-repeat center center;*/
+}
+
+.next-btn {
+    width: 100px;
+    height: 24px;
+    float: right;
+    display: inline;
+    margin-right: 10px;
+    background-color: #fff;
+   /* background:#fff url('next_p.png') no-repeat center center;*/
 }
 
 .colorsep {

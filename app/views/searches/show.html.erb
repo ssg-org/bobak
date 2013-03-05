@@ -23,12 +23,12 @@
 					</tr>
 					<% end if @owners %>
 				</table>
-				<div>
-					<% if @previous %>
-						<%= link_to('Prethodna', search_path(:q => params[:q], :o => @previous)) %>
-					<% end %>
+				<div class="prevnext">
 					<% if @next %>
-						<%= link_to('Sljedeća', search_path(:q => params[:q], :o => @next)) %>
+						<%= link_to('Sljedeća', search_path(:q => params[:q], :o => @next), :class=>"next-btn") %>
+					<% end %>
+					<% if @previous %>
+						<%= link_to('Prethodna', search_path(:q => params[:q], :o => @previous), :class=>"prev-btn") %>
 					<% end %>
 				</div>
 			</div>

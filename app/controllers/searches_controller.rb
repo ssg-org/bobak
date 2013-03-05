@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SearchesController < ApplicationController
-	MAX_LIMIT = 15
+	MAX_LIMIT = 20
 
 	def show
 		@title = "PRETRAGA"
