@@ -336,16 +336,33 @@ ul {
     background:#490a3d url('home_wh.png') no-repeat center center;
 }
 
+#menuhome:hover {
+    background:#fff url('home_col.png') no-repeat center center;
+}
+
 #menusearch {
     background:#a91046 url('search_wh.png') no-repeat center center;
+}
+
+#menusearch:hover {
+    background:#fff url('search_col.png') no-repeat center center;
 }
 
 #menustats {
     background:#f8ca00 url('stats_wh.png') no-repeat center center;
 }
 
+#menustats:hover {
+    background:#fff url('stats_col.png') no-repeat center center;
+}
+
+
 #menumail {
     background:#8a9b0f url('mail_wh.png') no-repeat center center;
+}
+
+#menumail:hover {
+    background:#fff url('mail_col.png') no-repeat center center;
 }
 
 #menuback {
