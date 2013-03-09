@@ -2,15 +2,15 @@
 <div id="mainContainer">
 	<div class="innerHolder">
 		<form class="form-contact" id="mainContactForm" method="post">
-		  <input type="text" name="name" class="emailforma" placeholder="Ime i prezime" >
-		  <input type="text" name="email" class="emailforma" placeholder="Email" >
-		  <textarea name="message" rows="5" cols="4" placeholder="Pitanje ili poruka" ></textarea>
+		  <input type="text" name="name" class="emailforma" placeholder="<%= t('home.contact.name') %>" >
+		  <input type="text" name="email" class="emailforma" placeholder="<%= t('home.contact.email') %>" >
+		  <textarea name="message" rows="5" cols="4" placeholder="<%= t('home.contact.message') %>" ></textarea>
 		  <br/>
 		</form><br/>
 
 		<div class="tip"><p></p>
 		<div class="send_btn">
-			<a class="" href="#" onclick="$('#mainContactForm').submit()">POŠALJI</a>
+			<a class="" href="#" onclick="$('#mainContactForm').submit()"><%= t('home.contact.button') %></a>
 		</div>
 		</div>
 	</div>

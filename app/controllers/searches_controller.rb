@@ -3,8 +3,8 @@ class SearchesController < ApplicationController
 	MAX_LIMIT = 20
 
 	def show
-		@title = "PRETRAGA"
-		@titletext = "Želite znati da li firma s kojom poslujete i sama posluje ispravno?\nMi vam omogućujemo brzi pregled ili pretragu firmi."
+		@title = t('home.show.search')
+		@titletext = t('home.show.search_desc')
 		@color = "#bd1550"
 		@back = true
 

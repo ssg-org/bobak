@@ -30,28 +30,6 @@
 
   }
 
-  function drawTable2() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Name');
-        data.addColumn('number', 'Salary');
-        data.addColumn('boolean', 'Full Time Employee');
-        data.addRows([
-          ['Mike',  {v: 10000, f: '$10,000'}, true],
-          ['Jim',   {v:8000,   f: '$8,000'},  false],
-          ['Alice', {v: 12500, f: '$12,500'}, true],
-          ['Bob',   {v: 7000,  f: '$7,000'},  true]
-        ]);
-
-        var options = {
-          width: '100px',
-          height: '480px',
-          showRowNumber: true,
-          alternatingRowStyle: false
-    }
-        var table = new google.visualization.Table(document.getElementById('table_div'));
-        table.draw(data, options);
-      }
-
   function drawChart() {
 
     var options = {
@@ -77,16 +55,16 @@
 </script>
     <div id="mainContainer">
         <div class="innerHolder">
-          <div class="tipLarge"><p>Statistike se odnose na mjesec: <strong>Mart, 2013</strong>.<br/>Svi nazivi firmi i banaka su onakvi kakve ih Centralna Banka ima sačuvane u svojoj bazi.</p></div>
+          <div class="tipLarge"><p><%= t ('reports.show.desc_html') %></p></div>
            <div class="widget-box">
-                    <div class="widget-title"><h5>TOP 10 FIRMI S NAJVEĆIM BROJEM BLOKIRANIH RAČUNA</h5></div>
+                    <div class="widget-title"><h5><%= t ('reports.show.top_10_owners_title') %></h5></div>
                     <div class="widget-content">
                       <div id="table_div" style="width: 680px; height:410px; display:block;"></div>
                     </div>              
              </div>
 
              <div class="widget-box">
-                    <div class="widget-title"><h5>TOP 10 BANAKA PO BROJU BLOKIRANIH FIRMI I RAČUNA</h5></div>
+                    <div class="widget-title"><h5><%= t ('reports.show.top_10_banks_title') %></h5></div>
                     <div class="widget-content">
                       <div id="chart_div" style="width: 600px; height:450px; display:block;"></div>
                      </div>              
