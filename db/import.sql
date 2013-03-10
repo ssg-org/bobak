@@ -2,7 +2,7 @@
 -- :raw_table - table name to load raw data from file
 -- :date - date of load
 
--- Command: psql -v raw_table=januar -v date=\'2013-01-03\' -f db/import.sql -h localhost -d bobak-dev -U bobak
+-- Command: psql -v raw_table=mart -v date=\'2013-03-01\' -f db/import.sql -h localhost -d bobak-dev -U bobak
 
 set client_encoding to 'UTF8';
 /*
@@ -18,7 +18,7 @@ TRUNCATE TABLE owner_summaries;
 drop table :raw_table;
 create table :raw_table (id varchar(255), account varchar(255), name text, bank varchar(255));
 
-\copy februar from db/export/2013-02-01.csv csv header
+\copy mart from db/export/2013-03-01.csv csv header
 
 -- BANKS
 ALTER TABLE ONLY banks ALTER COLUMN created_at SET DEFAULT current_timestamp;

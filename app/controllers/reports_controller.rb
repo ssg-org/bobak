@@ -3,13 +3,12 @@ require 'reporting'
 
 class ReportsController < ApplicationController
 	def show
-		@title = "STATISTIKE"
-		@titletext = "Iz mjeseca u mjesec mi uzimamo nove podatke od Centralne Banke Bosne i Hercegovine te ih spašavamo i generišemo različite statistike."
+		@title = t('home.show.stats')
+		@titletext = t('home.show.stats_desc')
 		@color = "#f8ca00"	
 		@back = true
 
-		# FIX THIS!!!
-		month = Time.now.month - 1
+		month = Time.now.month
 
 		case params[:t]
 		when 'by_accounts'

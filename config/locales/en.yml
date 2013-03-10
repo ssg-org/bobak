@@ -1,5 +1,42 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  layout:
+    footer:
+      copyright: 'Copyright 2013. Bobak is product of '
+      rights: 'All rights reserved.'
+  home:
+    about_html: >
+      <strong>Bobak</strong> je servis za pretraživnje firmi u Bosni i Hercegovini koje imaju blokirane račune u bosanskohercegovačkim bankama.<br/><br/>
+      Svaki mjesec <strong>Centralna Banka Bosne i Hercegovine</strong> objavljuje spisak koje imaju blokirane račune u bh bankama. Izvještaj se objavljuje na osnovu Odluke Upravnog vijeća CBBH broj: 96/12 od 04.10.2012.<br/><br/>
+      Za ispravnost podataka odgovorne su finansijske institucije koje su dostavile podatke u Registar.<br/><br/>
+      Bobak pohranjuje te podatke te omogućuje prikaz istih, pretragu te zanimljive statistike.<br/><br/><br/>
+      <strong>Kako Bobak radi?</strong><br/><br/>Jednostavno kliknite na ikonu za pretragu lijevo i tražite firme po njihovom nazivu ili jedinstvenom identifikacionom broju (JIB).<br/>Ako firma ima bar jedan blokiran račun pojavit će se u rezultatima.
+    show:
+      what_is: 'WHAT IS BOBAK?'
+      what_is_desc: 'Bobak je servis za pretraživnje firmi u Bosni i Hercegovini koje imaju blokirane račune u bh bankama.'
+      search: 'SEARCH'
+      search_desc: |
+        Želite znati da li firma s kojom poslujete i sama posluje ispravno?
+        Mi vam omogućujemo brzi pregled ili pretragu firmi.
+      stats: 'REPORTS'
+      stats_desc: 'Iz mjeseca u mjesec mi uzimamo nove podatke od Centralne Banke Bosne i Hercegovine te ih spašavamo i generišemo različite statistike.'
+    contact:
+      title: 'CONTACT'
+      desc: 'For all questions please contact Sredi Svoj Grad team.'
+      name: 'Your name'
+      email: 'Email'
+      message: 'Question or message'
+      button: 'SEND'
+  reports:
+    show:
+      desc_html: >
+        Statistike se odnose na mjesec: <strong>Mart, 2013</strong>.<br/>Svi nazivi firmi i banaka su onakvi kakve ih Centralna Banka ima sačuvane u svojoj bazi.
+      top_10_owners_title: 'TOP 10 FIRMI S NAJVEĆIM BROJEM BLOKIRANIH RAČUNA'
+      top_10_banks_title: 'TOP 10 BANAKA PO BROJU BLOKIRANIH FIRMI I RAČUNA'
+  searches:
+    show:
+      desc: 'Firme možete pretraživati po njihovom nazivu ili jedinstvenom identifikacionom broju (JIB)'
+      jib: 'JIB'
+      name: 'NAME'
+      accounts: 'ACCOUNTS'
+      next: 'Next'
+      previous: 'Previous'

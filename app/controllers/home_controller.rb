@@ -1,22 +1,16 @@
 #encoding: utf-8
 class HomeController < ApplicationController
-	def show
-		@title = ""
-		@titletext = ""
-		@color = "#e1e1e1"
-		@back = false
-	end
 
 	def about
-		@title = "ŠTA JE BOBAK?"
-		@titletext = "Bobak je servis za pretraživnje firmi u Bosni i Hercegovini koje imaju blokirane račune u bh bankama."
+		@title = t('home.show.what_is')
+		@titletext = t('home.show.what_is_desc')
 		@color = "#490a3d"
 		@back = true		
 	end
 
 	def contact
-		@title = "KONTAKT"
-		@titletext = "Ako imate nekih pitanja slobodno kontaktirajte Sredi Svoj Grad tim."
+		@title = t('home.contact.title')
+		@titletext = t('home.contact.desc')
 		@color = "#8a9b0f"
 		@back = true
 
