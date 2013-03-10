@@ -25,11 +25,25 @@
 		    email: 		{ required: true, email: true}
 		  },
 		  messages: {
-		  	name: 	'Molimo popunite sva polja.',
-		  	email: 	'Molimo unesite ispravnu email adresu.',
-		  	message: 'Molimo unesite Vašu poruku.' 
+		  	name: 	"<%= t('home.contact.nameerr') %>",
+		  	email: 	"<%= t('home.contact.emailerr') %>",
+		  	message: "<%= t('home.contact.messageerr') %>",
 		  },
+
 		  errorElement: "div",
+		  // wrapper: "div",  a wrapper around the error message
+	        errorPlacement: function(error, element) {
+	            offset = element.offset();
+	            error.insertBefore(element)
+	            error.addClass('message');  // add a class to the wrapper
+	            error.css('position', 'absolute');
+	            error.css('left', offset.left + element.outerWidth());
+	            error.css('top', offset.top);
+	            element.css('border', '1px solid #ff0000');
+	          //  element.value = element.messages[name];
+	           // name.css('border', '1px solid #ff0000');
+
+	        },
 		  submitHandler: function(form) {
    			form.submit();
  			}

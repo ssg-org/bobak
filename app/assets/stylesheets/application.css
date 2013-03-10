@@ -620,3 +620,16 @@ textarea {
     line-height: 17px;
 }
 
+div.message{
+   /* background-color: #FF0000; 
+    padding-left: 7px;*/
+}
+
+div.error{
+  /*  background-color:#FF0000;
+    border: 1px solid #fff;
+    padding: 5px;*/
+    margin-left: 15px;
+    color: #ff0000;
+}
+

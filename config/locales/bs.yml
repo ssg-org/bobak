@@ -27,6 +27,9 @@ bs:
       email: 'Email'
       message: 'Pitanje ili poruka'
       button: 'POŠALJI'
+      nameerr:   'Molimo unesite svoje ime'
+      emailerr:  'Unesite ispravnu email adresu'
+      messageerr: 'Ne mozete poslati praznu poruku' 
   reports:
     show:
       desc_html: >
