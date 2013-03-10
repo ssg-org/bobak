@@ -3,6 +3,7 @@ bs:
     footer:
       copyright: 'Copyright 2013. Bobak je proizvod '
       rights: 'Sva prava su zadržana.'
+      language: 'English version'
   home:
     about_html: >
       <strong>Bobak</strong> je servis za pretraživnje firmi u Bosni i Hercegovini koje imaju blokirane račune u bosanskohercegovačkim bankama.<br/><br/>

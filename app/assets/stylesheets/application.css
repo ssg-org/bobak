@@ -196,6 +196,23 @@ ul {
 
 }
 
+#language {
+    width: 80px;
+    height: 25px;
+    position: relative;
+    float: right;
+    display: inline;;
+    top:25px;
+
+}
+
+.flag {
+    margin-right: 5px;
+    border:1px solid #111;
+    height: 20px;
+    width: 24px;
+}
+
 .cblogo {
     width: 765px;
     height: 430px;

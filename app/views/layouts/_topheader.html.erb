@@ -1,5 +1,10 @@
 <div id="topHeader">
 	<div id="logo">
 		<%= link_to image_tag('logo.png', :class => 'logo'), root_path() %>
+		<div id="language">
+			<%= link_to image_tag('bs.png', :class => 'flag'), '?locale=bs' %>
+			<%= link_to image_tag('en.png', :class => 'flag'), '?locale=en' %>
+		</div>
 	</div>
+	
 </div>
