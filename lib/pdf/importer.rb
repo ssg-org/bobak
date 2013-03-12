@@ -6,7 +6,7 @@ module PDF
     include Singleton
 
     # Import data from PDF
-    def import(date, file, max_page)
+    def import(date, file, min_page = 0, max_page)
 
     	puts "Importing data from: #{file}"
 
@@ -35,7 +35,10 @@ module PDF
 
       start = Time.now
     	PDF::Reader.new(file).pages.each_with_index do |page, page_num|
-    		
+    		#Skip first min_page
+        next if page_num < min_page
+
+        # Stop after max_page 
     		break if page_num > max_page
 
         @total[:pages] += 1
@@ -107,7 +110,12 @@ module PDF
         if data.size == 2 && bank = get_bank(data[1])
           data << data[1].rpartition(bank).delete_if(&:empty?)
           data.delete_at(1)
-        end
+        # Fix for case whern there are more then 3 \t inside line
+        elsif data.size > 3 && bank = get_bank(data[-1])
+          p "> 3: Before #{data}"
+          data = [data[0], data[1..-2].join(' '), data[-1]]
+          p "> 3: After #{data}"
+        end          
 
         # Line with account
         if (data.size == 3 && !tmp.empty?)

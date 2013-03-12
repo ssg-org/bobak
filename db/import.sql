@@ -5,20 +5,20 @@
 -- Command: psql -v raw_table=mart -v date=\'2013-03-01\' -f db/import.sql -h localhost -d bobak-dev -U bobak
 
 set client_encoding to 'UTF8';
-/*
+
 TRUNCATE TABLE banks;
 TRUNCATE TABLE owners;
 TRUNCATE TABLE accounts;
 TRUNCATE TABLE account_statuses;
 TRUNCATE TABLE bank_summaries;
 TRUNCATE TABLE owner_summaries;
-*/
+
 
 -- Load raw data
 drop table :raw_table;
 create table :raw_table (id varchar(255), account varchar(255), name text, bank varchar(255));
 
-\copy mart from db/export/2013-03-01.csv csv header
+\copy januar from db/export/2013-01-03.csv csv header
 
 -- BANKS
 ALTER TABLE ONLY banks ALTER COLUMN created_at SET DEFAULT current_timestamp;
