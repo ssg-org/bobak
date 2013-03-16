@@ -6,20 +6,6 @@
 
 set client_encoding to 'UTF8';
 
-TRUNCATE TABLE banks;
-TRUNCATE TABLE owners;
-TRUNCATE TABLE accounts;
-TRUNCATE TABLE account_statuses;
-TRUNCATE TABLE bank_summaries;
-TRUNCATE TABLE owner_summaries;
-
-
--- Load raw data
-drop table :raw_table;
-create table :raw_table (id varchar(255), account varchar(255), name text, bank varchar(255));
-
-\copy januar from db/export/2013-01-03.csv csv header
-
 -- BANKS
 ALTER TABLE ONLY banks ALTER COLUMN created_at SET DEFAULT current_timestamp;
 ALTER TABLE ONLY banks ALTER COLUMN updated_at SET DEFAULT current_timestamp;
@@ -34,19 +20,18 @@ ALTER TABLE ONLY banks ALTER COLUMN updated_at SET DEFAULT null;
 ALTER TABLE ONLY owners ALTER COLUMN created_at SET DEFAULT current_timestamp;
 ALTER TABLE ONLY owners ALTER COLUMN updated_at SET DEFAULT current_timestamp;
 
+-- Import only owners with OID that are new
 insert into owners(oid, name)
-(select id, name
-	from (
-			(select id, name, ROW_NUMBER() OVER (PARTITION BY id ORDER BY LENGTH(name) DESC) as row_num
-			from januar
-			where id is not null
-			order by row_num desc)
-			union
-			(select distinct id, name, 1
-			from januar
-			where id is null)) a
-	where a.row_num=1 ) 
-except (select oid, name from owners);
+(	select id, name 
+	from
+		(select 
+			:raw_table.id,
+			:raw_table.name, 
+			ROW_NUMBER() OVER (PARTITION BY :raw_table.id ORDER BY LENGTH(:raw_table.name) DESC, :raw_table.account) as row_num
+		from :raw_table left join owners on :raw_table.id = owners.oid
+		where owners.id is null and :raw_table.id is not null) a
+	where a.row_num = 1
+);
 
 ALTER TABLE ONLY owners ALTER COLUMN created_at SET DEFAULT null;
 ALTER TABLE ONLY owners ALTER COLUMN updated_at SET DEFAULT null;
@@ -57,19 +42,13 @@ ALTER TABLE ONLY accounts ALTER COLUMN updated_at SET DEFAULT current_timestamp;
 
 insert into accounts(number, name, bank_id, owner_id)
 (
-	(select :raw_table.account, :raw_table.name, banks.id, owners.id 
+	select :raw_table.account, :raw_table.name, banks.id, owners.id 
 	from :raw_table 
-	inner join banks on :raw_table.bank = banks.name
-	inner join owners on :raw_table.id = owners.oid)
-	union
-	(select :raw_table.account, :raw_table.name, banks.id, owners.id 
-	from :raw_table 
-	inner join banks on :raw_table.bank = banks.name
-	inner join owners on :raw_table.name = owners.name
-	where :raw_table.id is null)
-)
-except 
-(select number, name, bank_id, owner_id from accounts);
+		inner join banks on :raw_table.bank = banks.name
+		inner join owners on :raw_table.id = owners.oid
+		left join accounts on :raw_table.account = accounts.number
+	where accounts.id is null
+);
 
 ALTER TABLE ONLY accounts ALTER COLUMN created_at SET DEFAULT null;
 ALTER TABLE ONLY accounts ALTER COLUMN updated_at SET DEFAULT null;
@@ -101,7 +80,6 @@ INSERT INTO bank_summaries(bank_id, date, year, month, day, blocked_accounts, bl
 
 ALTER TABLE ONLY bank_summaries ALTER COLUMN created_at SET DEFAULT null;
 ALTER TABLE ONLY bank_summaries ALTER COLUMN updated_at SET DEFAULT null;
-
 
 -- Account summaries
 ALTER TABLE ONLY owner_summaries ALTER COLUMN created_at SET DEFAULT current_timestamp;

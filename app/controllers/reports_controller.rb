@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
 		@color = "#f8ca00"	
 		@back = true
 
-		month = Time.now.month
+		month = params[:m] || Time.now.month
 
 		case params[:t]
 		when 'by_accounts'

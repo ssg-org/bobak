@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302125124) do
+ActiveRecord::Schema.define(:version => 20130316215434) do
 
   create_table "account_statuses", :force => true do |t|
     t.integer  "account_id"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20130302125124) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "accounts", ["number"], :name => "index_accounts_on_number", :unique => true
+
   create_table "bank_summaries", :force => true do |t|
     t.date     "date"
     t.integer  "blocked_accounts"
@@ -46,8 +48,6 @@ ActiveRecord::Schema.define(:version => 20130302125124) do
     t.integer  "month"
     t.integer  "day"
   end
-
-  add_index "bank_summaries", ["bank_id", "year", "month"], :name => "index_bank_summaries_on_bank_id_and_year_and_month"
 
   create_table "banks", :force => true do |t|
     t.string   "name"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130302125124) do
   end
 
   add_index "owner_summaries", ["owner_id", "year", "month"], :name => "index_owner_summaries_on_owner_id_and_year_and_month"
+  add_index "owner_summaries", ["year", "month"], :name => "a"
 
   create_table "owners", :force => true do |t|
     t.string   "oid"
@@ -101,5 +102,6 @@ ActiveRecord::Schema.define(:version => 20130302125124) do
   end
 
   add_index "owners", ["full_text"], :name => "owners_full_text_idx", :index_type => :gin
+  add_index "owners", ["oid"], :name => "index_owners_on_oid", :unique => true
 
 end
