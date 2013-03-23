@@ -18,14 +18,21 @@ class Owner < ActiveRecord::Base
 
   def self.search(query, offset = 0, limit = 10, month = nil, year = nil)
 
-    results = self
-      .includes(:owner_summaries)
-      .where(:owner_summaries => {:year => year, :month => month})
-      .search_full_text(query)
-      .reorder('owner_summaries.blocked_accounts DESC')
-      .offset(offset)
-      .limit(limit)
-
-    return results
+    if query.nil?
+      return self
+        .includes(:owner_summaries)
+        .where(:owner_summaries => {:year => year, :month => month})
+        .order("owners.name")
+        .offset(offset)
+        .limit(limit)           
+    else
+      return self
+        .includes(:owner_summaries)
+        .where(:owner_summaries => {:year => year, :month => month})
+        .search_full_text(query)
+        .reorder('owner_summaries.blocked_accounts DESC')
+        .offset(offset)
+        .limit(limit)
+    end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316215434) do
+ActiveRecord::Schema.define(:version => 20130323104558) do
 
   create_table "account_statuses", :force => true do |t|
     t.integer  "account_id"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20130316215434) do
   end
 
   add_index "owners", ["full_text"], :name => "owners_full_text_idx", :index_type => :gin
+  add_index "owners", ["name", "id"], :name => "index_owners_on_name_and_id"
   add_index "owners", ["oid"], :name => "index_owners_on_oid", :unique => true
 
 end
