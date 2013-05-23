@@ -27,7 +27,7 @@ class Owner < ActiveRecord::Base
         .limit(limit)           
     else
       return self
-        .includes(:owner_summaries)
+        .joins(:owner_summaries)
         .where(:owner_summaries => {:year => year, :month => month})
         .search_full_text(query)
         .reorder('owner_summaries.blocked_accounts DESC')

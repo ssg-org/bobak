@@ -49,32 +49,13 @@ ActiveRecord::Schema.define(:version => 20130323104558) do
     t.integer  "day"
   end
 
+  add_index "bank_summaries", ["bank_id", "year", "month"], :name => "index_bank_summaries_on_bank_id_and_year_and_month"
+
   create_table "banks", :force => true do |t|
     t.string   "name"
     t.string   "city"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "februar", :id => false, :force => true do |t|
-    t.string "id"
-    t.string "account"
-    t.text   "name"
-    t.string "bank"
-  end
-
-  create_table "januar", :id => false, :force => true do |t|
-    t.string "id"
-    t.string "account"
-    t.text   "name"
-    t.string "bank"
-  end
-
-  create_table "mart", :id => false, :force => true do |t|
-    t.string "id"
-    t.string "account"
-    t.text   "name"
-    t.string "bank"
   end
 
   create_table "owner_summaries", :force => true do |t|
@@ -89,7 +70,6 @@ ActiveRecord::Schema.define(:version => 20130323104558) do
   end
 
   add_index "owner_summaries", ["owner_id", "year", "month"], :name => "index_owner_summaries_on_owner_id_and_year_and_month"
-  add_index "owner_summaries", ["year", "month"], :name => "a"
 
   create_table "owners", :force => true do |t|
     t.string   "oid"

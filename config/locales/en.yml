@@ -33,7 +33,7 @@ en:
   reports:
     show:
       desc_html: >
-        These statistics are for: <strong>March, 2013</strong>.<br/>Official company name incosistency is due to issue that CBBiH has when generating pdf report.
+        These statistics are for: <strong>May, 2013</strong>.<br/>Official company name incosistency is due to issue that CBBiH has when generating pdf report.
       top_10_owners_title: 'TOP 10 COMPANIES WITH MOST BLOCKED '
       top_10_banks_title: 'TOP 10 BANAKS WITH HIGHEST NUMBER OF BLOCKED COMPANIES AND BANK ACCOUNTS'
   searches:

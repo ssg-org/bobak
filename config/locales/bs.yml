@@ -33,7 +33,7 @@ bs:
   reports:
     show:
       desc_html: >
-        Statistike se odnose na mjesec: <strong>Mart, 2013</strong>.<br/>Svi nazivi firmi i banaka su onakvi kakve ih Centralna Banka ima sačuvane u svojoj bazi.
+        Statistike se odnose na mjesec: <strong>Maj, 2013</strong>.<br/>Svi nazivi firmi i banaka su onakvi kakve ih Centralna Banka ima sačuvane u svojoj bazi.
       top_10_owners_title: 'TOP 10 FIRMI S NAJVEĆIM BROJEM BLOKIRANIH RAČUNA'
       top_10_banks_title: 'TOP 10 BANAKA PO BROJU BLOKIRANIH FIRMI I RAČUNA'
   searches:
